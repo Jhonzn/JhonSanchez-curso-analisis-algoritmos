@@ -14,3 +14,5 @@ Las carpetas del repositorio se organizan de la siguiente manera:
 - `laboratorio-3/`: contiene los archivos correspondientes al tercer informe de laboratorio.
 - `laboratorio-4/`: contiene los archivos correspondientes al cuarto informe de laboratorio.
 - `laboratorio-5/`: contiene los archivos correspondientes al quinto informe de laboratorio.
+
+- `benchmarks/`: contiene las pruebas de rendimiento utilizadas para medir y comparar la eficiencia de los algoritmos implementados.
