@@ -16,3 +16,5 @@ Las carpetas del repositorio se organizan de la siguiente manera:
 - `laboratorio-5/`: contiene los archivos correspondientes al quinto informe de laboratorio.
 
 - `benchmarks/`: contiene las pruebas de rendimiento utilizadas para medir y comparar la eficiencia de los algoritmos implementados.
+
+colaborador: santiagoSuarez219
