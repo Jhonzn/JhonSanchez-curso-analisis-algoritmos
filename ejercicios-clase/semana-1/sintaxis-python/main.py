@@ -9,7 +9,7 @@ print(type(tiempo))
 algoritmo = "algoritmo de ordenamiento"
 print(type(algoritmo))
 ordenado = True
-print(type(ordenado))           
+print(type(ordenado))
 resultado = None
 print(type(resultado))
 
