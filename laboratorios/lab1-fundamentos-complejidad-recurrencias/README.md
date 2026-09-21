@@ -1,9 +1,11 @@
-# Laboratorio evaluativo 01 � Fundamentos, complejidad y recurrencias
+# Laboratorio evaluativo 01 Fundamentos, complejidad y recurrencias
 
 ## 1. Punto 1 — [Analizar el algoritmo antes de comprar hardware]
 
 Muchas veces tendemos a confundir hacer algo bien, algo que dio resultados con la forma en la que se realizó, no se puede negar que casi siempre en nuestra ignorancia no cuestionamos nuestros métodos, al contrario, nos montamos en un pedestal creyendo que somo unos genios, pero en realidad nos falta mucho. Eso pasa con los algoritmos, en este ámbito importa mucho mas la eficiencia que la corrección de una lista o en un caso más práctico ordenar expedientes a mano o cualquier clase de documentación. La eficiencia respecto al tiempo importa mucho porque no siempre vamos a tener las mismas entradas a ordenar, no podemos comparar 50 expedientes con 100.000, son cifras completamente distintas y con esa diferencia, puede pasar de que un algoritmo funcione bien a que funcione, pero se tarde por mucho mas tiempo y no cumpla con los requisitos de negocio. La restricción que el sistema de la plataforma temiza mencionado antes es que anteriormente de trabajaban con 20.000 registros en 4 municipios, actualmente el sistema ya no cumple por la expansión del programa que paso de ser 1.200.000, por ello el sistema ya se desborda en la ventana de 4 horas de 2:00am a 6:00am que tiene de procesamiento. Por esta razón no alcanza a ordenar los registros y les toca trabajar con una lista parcial.
+
 Duplicar el servidor podría reducir considerablemente los tiempos de procesamiento, será un efecto placebo muy reconfortante porque aportará procesamiento a un algoritmo que de por sí ya no cumple con la eficiencia respecto al tiempo requerido, puesto que llevan 3 días sin entregar una lista completa ordenada, pero ahí está la trampa, el sistema mejorará y todo, pero cuando haya más registros, si estos se duplican, el trabajo podría aumentar aproximadamente cuatro veces, y si se triplican, hasta nueve veces, haciendo que el sistema vuelva a quedar por fuera del tiempo disponible para procesar los registros diarios. Esta no es una solución viable en todo el sentido de la palabra, en el sentido de la eficiencia energética y también a largo plazo.
+
 Una empresa que trabaja con pedidos necesita organizar los realizados durante el día. Si tiene 50 pedidos, un método poco eficiente puede funcionar de manera correcta y terminar el proceso en poco tiempo respecto a la necesidad de la operación. Sin embargo, si la empresa empieza a crecer y comienza a recibir 100.000 pedidos diarios, el mismo método puede tardar más tiempo o incluso no terminar dentro del tiempo disponible. Aunque el algoritmo siga cumpliendo el objetivo correctamente de los pedidos, deja de ser útil porque no cumple con los tiempos requeridos. En este caso, aumentar la capacidad del servidor podría reducir temporalmente el tiempo de ejecución, pero no solucionaría el problema de fondo si el algoritmo tiene una complejidad elevada. Lo adecuado sería buscar un algoritmo más eficiente que pueda manejar el crecimiento de los datos sin que el tiempo de procesamiento aumente de forma excesiva.
 
 ---
@@ -11,7 +13,9 @@ Una empresa que trabaja con pedidos necesita organizar los realizados durante el
 ## 2. Punto 2 — [Responsabilidad ambiental y ética de la implementación]
 
 El tiempo de ejecución en el proceso nocturno sí afecta mucho y podría aumentar en el futuro, puesto que, al haber cada vez más registros, esto significaría más procesamiento por parte del servidor. Si sumamos el hecho de que no se le va a hacer un análisis detallado al algoritmo empleado para este proceso, porque funciona bien y la única solución más sencilla es sumar capacidad de procesamiento para este proceso, vemos que esto requiere un mayor consumo energético por los nuevos recursos que tiene el servidor y aún más con el aumento de los registros, lo que supone un mayor consumo a largo plazo. Por ello, la forma más viable es atacar el problema de raíz: el algoritmo, y establecer uno mejor.
+
 La primera forma en la que la lentitud o una falla en el sistema podría perjudicar a alguien, alguien que tenga serios problemas cardiovasculares y que los datos se carguen directamente desde el portal web, es decir que estén desordenados los registros. Este caso con un sistema lento perjudicaría mucho a un usuario con alto riesgo, porque en este contexto un/a paciente podría presentar problemas del corazón que pongan en riesgo su vida y el sistema apenas estaría ordenando los registros de acuerdo con el riesgo. El costo lo asumiría el equipo de desarrollo porque son los encargados de automatizar este proceso tan importante en la empresa. La segunda manera es que el sistema no alcance a organizar las pruebas en orden de riesgo y que use esa lista como base para el proceso y que no haya una prioridad a la hora de atender a los pacientes y por lo tanto se descuiden otros pacientes que tienen mas riesgo por el algoritmo tan ineficiente, en este caso el costo lo asumiría la secretaria por la mala metodología que se implementa a la hora de hacer las llamadas.
+
 La obligación adicional aparte del tiempo es la reputación que se puede ganar o perder ya dependiendo del servicio, porque expone la salud de las personas que corren el riesgo de tener problemas del corazón que les pueda costar la vida. Esto no lleva a que el tiempo de procesamiento no es solo un capricho, esto define que perciben por algo que hace un equipo de desarrollo, ejemplo: si yo voy a un ecommerce a realizar una compra online, la pagina le falla de alguna manera, no carga, no procesa la compra, miles de cosas pueden pasar, lo que genera desconfianza entre los usuarios. El criterio del orden importa mucho, no es justo que alguien tenga menos riesgo que otro pueda ser priorizado después de otra persona que no tiene tanto riesgo de perder la vida. Si se contacta primero a alguien que tiene menos riesgo a alguien que tiene bastantes problemas, como consecuencia, sea contactado después. Por lo tanto, la eficiencia es importante para procesar todos los registros dentro del tiempo disponible, pero la corrección es fundamental para garantizar que la priorización sea justa y segura para los pacientes.
 
 ---
@@ -39,7 +43,29 @@ Para Insertion Sort, mi predicción antes de realizar las mediciones es:
 
 ### 3.2 [Demostración experimental]
 
-Descripción breve de lo realizado.
+Se ejecutó `insertion_sort` para los tres escenarios y diferentes tamaños de entrada, registrando el número de comparaciones y el tiempo de ejecución.
+
+#### Comparaciones
+
+![Gráfica de comparaciones](graficas/parte3_comparaciones.png)
+
+#### Tiempo de ejecución
+
+![Gráfica de tiempo](graficas/parte3_tiempo.png)
+
+En contraste con lo explicado acerca de los tres casos, se había predicho el peor caso, el caso promedio y el mejor caso. Se acertó, puesto que el número de comparaciones ya estaba estimado según la teoría y se pudo demostrar en la práctica.
+
+### Resultados de comparaciones
+
+| Tamaño de entrada (n) |  Aleatorio | Casi ordenado |    Inverso |
+| --------------------: | ---------: | ------------: | ---------: |
+|                   100 |      2.542 |           100 |      4.950 |
+|                   200 |      9.970 |           203 |     19.900 |
+|                   400 |     40.436 |           417 |     79.800 |
+|                   800 |    160.484 |           866 |    319.600 |
+|                 1.600 |    648.481 |         1.851 |  1.279.200 |
+|                 3.200 |  2.533.103 |         4.172 |  5.118.400 |
+|                 6.400 | 10.276.753 |        10.277 | 20.476.800 |
 
 ---
 

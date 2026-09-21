@@ -1,6 +1,5 @@
 """Algoritmos de ordenamiento instrumentados para el Laboratorio 1."""
  
- 
 def insertion_sort(datos: list[int]) -> tuple[list[int], int]:
     """Ordena una lista de indices de riesgo con el metodo de insercion.
  
@@ -16,6 +15,29 @@ def insertion_sort(datos: list[int]) -> tuple[list[int], int]:
     # TODO: implemente el algoritmo contando cada comparacion
     # entre dos elementos de la lista.
     
+    lista = datos.copy()
+    comparaciones = 0
+
+    # Recorre desde el segundo elemento (indice 1) hasta el final
+    for i in range(1, len(lista)):
+        clave = lista[i]          # elemento que se va a insertar
+        j = i - 1                 # ultimo indice de la parte ya ordenada
+
+        # Compara elementos mientras sean menores que 'clave'
+        while j >= 0:
+            comparaciones += 1
+
+            if lista[j] < clave:
+                lista[j + 1] = lista[j]
+                j -= 1
+            else:
+                break
+
+        lista[j + 1] = clave      # inserta 'clave' en su lugar correcto
+
+    return lista, comparaciones
+
+
 def merge_sort(datos: list[int]) -> tuple[list[int], int]:
     """Ordena una lista de indices de riesgo con el metodo de mezcla.
  
