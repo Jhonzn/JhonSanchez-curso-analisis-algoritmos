@@ -98,7 +98,7 @@ def main() -> None:
 
     plt.tight_layout()
     plt.savefig(CARPETA_GRAFICAS / "parte3_comparaciones.png", dpi=300)
-    plt.close()
+    plt.show()
 
 
     # Crear gráfica de tiempo
@@ -133,7 +133,7 @@ def main() -> None:
 
     plt.tight_layout()
     plt.savefig(CARPETA_GRAFICAS / "parte3_tiempo.png", dpi=300)
-    plt.close()
+    plt.show()
 
 
 if __name__ == "__main__":

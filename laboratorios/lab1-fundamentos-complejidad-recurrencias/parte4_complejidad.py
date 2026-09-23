@@ -82,7 +82,7 @@ def main() -> None:
 
     plt.tight_layout()
     plt.savefig(CARPETA_GRAFICAS / "parte4_tiempo.png", dpi=300)
-    plt.close()
+    plt.show()
 
 if __name__ == "__main__":
     main()

@@ -38,6 +38,17 @@ def insertion_sort(datos: list[int]) -> tuple[list[int], int]:
     return lista, comparaciones
 
 def merge(izquierda: list[int], derecha: list[int]) -> tuple[list[int], int]:
+    """Mezcla dos listas ordenadas en orden descendente. 
+        
+    No modifica las listas recibidas: construye una nueva lista con los elementos ordenados. 
+        
+    Args: 
+        izquierda: Primera lista ordenada. derecha: Segunda lista ordenada. 
+        
+    Returns: 
+        Una tupla con la lista mezclada y el número total de comparaciones entre elementos 
+        realizadas durante el proceso. 
+    """
     resultado = []
     i = 0
     j = 0

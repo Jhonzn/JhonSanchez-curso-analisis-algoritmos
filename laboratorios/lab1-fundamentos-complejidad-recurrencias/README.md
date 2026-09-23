@@ -505,5 +505,3 @@ Merge Sort permite mantener una única implementación y ofrece un comportamient
 ## Autores
 
 * [Jhon Fernando Sánchez Álvarez]
-
-
