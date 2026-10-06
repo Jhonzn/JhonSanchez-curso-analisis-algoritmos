@@ -43,7 +43,7 @@
 - Los generadores producen listas con valores distintos y semilla reproducible.
 
 **Lo que puede mejorar:**
-- Hay varias faltas de estilo PEP 8 (espacios en blanco al final de línea, falta de líneas en blanco entre funciones, importación antes del docstring del módulo en `datos.py`).
+- Hay varias faltas de estilo PEP 8 (falta de líneas en blanco entre funciones, importación antes del docstring del módulo en `datos.py`).
 - Los archivos `parte3_casos.py` y `parte4_complejidad.py` no tienen docstring de módulo, y el docstring de `merge` no sigue bien el formato Google.
 - En el escenario B, los registros nuevos son todos los de menor riesgo, lo que lo hace más fácil de lo que describe el enunciado.
 
