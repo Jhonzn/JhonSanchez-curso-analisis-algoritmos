@@ -1,14 +1,19 @@
+"""Experimentos de Insertion Sort para los escenarios de Tamiza."""
+
 import time
+from pathlib import Path
+
 import matplotlib.pyplot as plt
 
-from pathlib import Path
 from datos import generar_aleatorio, generar_casi_ordenado, generar_inverso
 from algoritmos import insertion_sort
+
 
 CARPETA = Path(__file__).parent
 CARPETA_GRAFICAS = CARPETA / "graficas"
 
 CARPETA_GRAFICAS.mkdir(exist_ok=True)
+
 
 def main() -> None:
     """Punto de entrada del script."""
@@ -92,14 +97,20 @@ def main() -> None:
     plt.xlabel("Tamaño de entrada (n)")
     plt.ylabel(r"Número de comparaciones ($\times 10^7$)")
     plt.title("Insertion Sort - Comparaciones")
-    plt.ticklabel_format(axis="y", style="scientific", scilimits=(0, 0))
+    plt.ticklabel_format(
+        axis="y",
+        style="scientific",
+        scilimits=(0, 0)
+    )
     plt.legend()
     plt.grid(True)
 
     plt.tight_layout()
-    plt.savefig(CARPETA_GRAFICAS / "parte3_comparaciones.png", dpi=300)
+    plt.savefig(
+        CARPETA_GRAFICAS / "parte3_comparaciones.png",
+        dpi=300
+    )
     plt.show()
-
 
     # Crear gráfica de tiempo
     plt.figure(figsize=(10, 6))
@@ -132,7 +143,10 @@ def main() -> None:
     plt.grid(True)
 
     plt.tight_layout()
-    plt.savefig(CARPETA_GRAFICAS / "parte3_tiempo.png", dpi=300)
+    plt.savefig(
+        CARPETA_GRAFICAS / "parte3_tiempo.png",
+        dpi=300
+    )
     plt.show()
 
 

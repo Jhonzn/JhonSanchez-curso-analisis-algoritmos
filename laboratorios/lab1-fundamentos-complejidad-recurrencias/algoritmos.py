@@ -1,29 +1,27 @@
 """Algoritmos de ordenamiento instrumentados para el Laboratorio 1."""
- 
+
+
 def insertion_sort(datos: list[int]) -> tuple[list[int], int]:
     """Ordena una lista de indices de riesgo con el metodo de insercion.
- 
+
     No modifica la lista recibida: trabaja sobre una copia.
- 
+
     Args:
-        datos: lista de indices de riesgo a ordenar.
- 
+        datos: Lista de indices de riesgo a ordenar.
+
     Returns:
         Una tupla con la lista ordenada y el numero total de
         comparaciones entre elementos realizadas durante el proceso.
     """
-    # TODO: implemente el algoritmo contando cada comparacion
-    # entre dos elementos de la lista.
-    
     lista = datos.copy()
     comparaciones = 0
 
-    # Recorre desde el segundo elemento (indice 1) hasta el final
+    # Recorre desde el segundo elemento hasta el final.
     for i in range(1, len(lista)):
-        clave = lista[i]          # elemento que se va a insertar
-        j = i - 1                 # ultimo indice de la parte ya ordenada
+        clave = lista[i]
+        j = i - 1
 
-        # Compara elementos mientras sean menores que 'clave'
+        # Compara elementos mientras sean menores que la clave.
         while j >= 0:
             comparaciones += 1
 
@@ -33,21 +31,27 @@ def insertion_sort(datos: list[int]) -> tuple[list[int], int]:
             else:
                 break
 
-        lista[j + 1] = clave      # inserta 'clave' en su lugar correcto
+        lista[j + 1] = clave
 
     return lista, comparaciones
 
-def merge(izquierda: list[int], derecha: list[int]) -> tuple[list[int], int]:
-    """Mezcla dos listas ordenadas en orden descendente. 
-        
-    No modifica las listas recibidas: construye una nueva lista con los elementos ordenados. 
-        
-    Args: 
-        izquierda: Primera lista ordenada. derecha: Segunda lista ordenada. 
-        
-    Returns: 
-        Una tupla con la lista mezclada y el número total de comparaciones entre elementos 
-        realizadas durante el proceso. 
+
+def merge(
+    izquierda: list[int],
+    derecha: list[int]
+) -> tuple[list[int], int]:
+    """Mezcla dos listas ordenadas en orden descendente.
+
+    No modifica las listas recibidas: construye una nueva lista
+    con los elementos ordenados.
+
+    Args:
+        izquierda: Primera lista ordenada.
+        derecha: Segunda lista ordenada.
+
+    Returns:
+        Una tupla con la lista mezclada y el numero total de
+        comparaciones entre elementos realizadas durante el proceso.
     """
     resultado = []
     i = 0
@@ -72,18 +76,16 @@ def merge(izquierda: list[int], derecha: list[int]) -> tuple[list[int], int]:
 
 def merge_sort(datos: list[int]) -> tuple[list[int], int]:
     """Ordena una lista de indices de riesgo con el metodo de mezcla.
- 
+
     No modifica la lista recibida: trabaja sobre una copia.
- 
+
     Args:
-        datos: lista de indices de riesgo a ordenar.
- 
+        datos: Lista de indices de riesgo a ordenar.
+
     Returns:
         Una tupla con la lista ordenada y el numero total de
         comparaciones entre elementos realizadas durante el proceso.
     """
-    # TODO: implemente dividir, conquistar y combinar, contando
-    # cada comparacion realizada dentro de la mezcla.
     lista = datos.copy()
 
     if len(lista) <= 1:
