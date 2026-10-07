@@ -67,19 +67,13 @@ porque corresponde al trabajo realizado para encontrar el subarreglo que cruza e
 Calculamos:
 
 $$
-n^{\log_b a}
-=
-n^{\log_2 2}
-=
-n
+n^{\log_b a}=n^{\log_2 2}=n
 $$
 
 Por lo tanto:
 
 $$
-f(n)=\Theta(n)
-=
-\Theta\left(n^{\log_2 2}\right)
+f(n)=\Theta(n)=\Theta\left(n^{\log_2 2}\right)
 $$
 
 Esto corresponde al **caso 2 del método maestro**, ya que:
