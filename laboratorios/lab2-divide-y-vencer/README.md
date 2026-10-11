@@ -1,154 +1,261 @@
+# Laboratorio evaluativo 02 - Dividir y vencer
+
 ## Autores
 * [Jhon Fernando Sánchez Álvarez]
 
-# Laboratorio evaluativo 02 - Dividir y vencer
+## Tecnologías utilizadas
 
-## 1. Recurrencia y análisis de complejidad
+- Python 3.13
+- Git y GitHub
+- `time.perf_counter()` para la medición de tiempos
+- Matplotlib para la generación de gráficas
 
-### Recurrencia de `subarreglo_maximo`
+## Requisitos
 
-El algoritmo `subarreglo_maximo` utiliza la estrategia de **divide y vencerás**. Primero divide el arreglo en dos partes aproximadamente iguales y después resuelve el problema de forma recursiva para cada mitad.
+- Python 3.13
+- Git
+- Matplotlib
 
-En cada llamada se realizan las siguientes operaciones:
+## Ejecución
 
-1. Se divide el problema en **dos subproblemas**, uno correspondiente a la mitad izquierda y otro a la mitad derecha.
-2. Cada subproblema tiene aproximadamente un tamaño de `n/2`.
-3. Se calcula el mejor subarreglo que cruza el punto medio mediante `suma_cruzada`.
-4. Finalmente, se comparan los tres resultados obtenidos: el mejor de la izquierda, el mejor de la derecha y el mejor que cruza el punto medio.
+### 1. Activar el entorno virtual
 
-La función `suma_cruzada` recorre la mitad izquierda desde el punto medio hacia el inicio y la mitad derecha desde el punto medio hacia el final. En conjunto, recorre una cantidad de elementos proporcional a `n`, por lo que su costo es:
+Desde la carpeta del repositorio:
+
+**Windows PowerShell:**
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+**Git Bash:**
+
+```bash
+source .venv/Scripts/activate
+```
+
+### 2. Instalar las dependencias
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Ejecutar las pruebas
+
+```bash
+cd laboratorios\lab2-divide-y-vencer
+```
+
+```bash
+python pruebas.py
+```
+
+Este script ejecuta las pruebas de los algoritmos de **fuerza bruta** y **divide y vencerás**, incluyendo casos pequeños, valores negativos, valores positivos, un caso que cruza el punto medio y diferentes listas aleatorias.
+
+Si todas las pruebas son correctas, se mostrará:
+
+```text
+Todas las pruebas fueron superadas correctamente.
+```
+
+### 4. Ejecutar las mediciones
+
+```bash
+python medicion.py
+```
+
+Este script ejecuta ambos algoritmos sobre diferentes tamaños de entrada, realiza **10 ejecuciones por cada tamaño**, calcula el promedio de los tiempos y verifica que ambos algoritmos obtengan la misma suma máxima.
+
+También genera la gráfica con las mediciones y los promedios.
+
+La gráfica se guarda automáticamente en:
+
+```text
+graficas/tiempo_vs_n.png
+```
+
+### 5. Desactivar el entorno virtual
+
+```bash
+cd ../..
+```
+```bash
+deactivate
+```
+# Parte 1 — Verificación de las soluciones
+
+Se verificaron las dos soluciones implementadas para encontrar el subarreglo de suma máxima: **fuerza bruta** y **divide y vencerás**.
+
+Las pruebas incluyeron diferentes situaciones para comprobar que ambas soluciones obtienen la misma suma máxima:
+
+- La serie de 8 días planteada en el problema: `[-3, 5, -2, 8, -6, 3, 9, -4]`, cuyo resultado esperado es `17`.
+- Una serie con un solo elemento.
+- Una serie donde todos los valores son negativos.
+- Una serie donde todos los valores son positivos.
+- Una serie en la que el subarreglo óptimo cruza el punto medio, para verificar específicamente la función utilizada por divide y vencerás.
+- **30 listas generadas aleatoriamente**, utilizando una semilla fija, para comparar los resultados obtenidos por ambos algoritmos.
+
+Las pruebas se realizaron mediante instrucciones `assert`, comparando principalmente la suma máxima obtenida por cada solución. De esta manera se comprobó que ambas implementaciones producen el mismo resultado para los casos evaluados.
+
+Para reproducir las pruebas:
+
+```bash
+python pruebas.py
+```
+
+Si todas las pruebas son correctas, se muestra el mensaje:
+
+```text
+Todas las pruebas fueron superadas correctamente.
+```
+
+# Parte 2 — Medición y gráfica
+
+Para comparar el comportamiento de los algoritmos se utilizaron los siguientes tamaños de entrada:
+
+`10, 50, 100, 500, 1000, 2000 y 4000`
+
+Para cada tamaño de entrada, creamos un conjunto de números enteros aleatorios, con valores entre `-100` y `100`. Usamos una semilla fija, la (`42`), para asegurarnos de que la misma lista se aplicara a ambos algoritmos. Esto permitió una comparación justa, ya que las condiciones eran idénticas.
+
+Repetimos cada prueba **10 veces**s. Después, sacamos el tiempo promedio de todas esas ejecuciones. Es importante destacar que solo medimos el tiempo que tardaba el algoritmo en ejecutarse, sin contar el tiempo que llevaba crear los datos.
+
+Además, en cada tamaño se verificó que ambos algoritmos obtuvieran la misma suma máxima antes de registrar los resultados.
+
+La gráfica resultante muestra las ejecuciones realizadas y el promedio de tiempo para cada algoritmo:
+
+![Tiempo de ejecución](graficas/tiempo_vs_n.png)
+
+Los resultados indican que para entradas pequeñas, las diferentes soluciones son muy parecidas, llegando incluso a ser más rápidas las de fuerza bruta por los gastos extra de las llamadas recursivas en divide y vencerás. No obstante, conforme el tamaño de la entrada crece, la diferencia se vuelve mucho más notoria.
+
+Por ejemplo, para `n = 4000`, la fuerza bruta obtuvo un promedio aproximado de **0.314219 s**, mientras que divide y vencerás obtuvo aproximadamente **0.004455 s**.
+
+Los tiempos de cada ejecución se registraron para obtener el promedio mostrado en la gráfica.
+
+# Parte 3 — Análisis de los resultados
+
+## 3.1. Recurrencia y análisis de complejidad
+
+**Divide y vencerás**
+
+Este algoritmo divide la lista en dos mitades, resuelve cada una de forma recursiva y después encuentra el mejor subarreglo que cruza el punto medio. Como este último cálculo recorre los elementos en tiempo lineal, la recurrencia es:
 
 $$
-\Theta(n)
+T(n)=2T(n/2)+\Theta(n)
 $$
 
-Por lo tanto, la recurrencia del algoritmo es:
-
-$$
-T(n)=2T\left(\frac{n}{2}\right)+\Theta(n)
-$$
-
-con el caso base:
-
-$$
-T(1)=\Theta(1)
-$$
-
-### Resolución mediante el método maestro
-
-La forma general del método maestro es:
-
-$$
-T(n)=aT\left(\frac{n}{b}\right)+f(n)
-$$
-
-Para nuestra recurrencia:
-
-$$
-a=2
-$$
-
-porque se generan dos subproblemas.
-
-$$
-b=2
-$$
-
-porque cada subproblema tiene aproximadamente la mitad del tamaño.
-
-Y:
-
-$$
-f(n)=\Theta(n)
-$$
-
-porque corresponde al trabajo realizado para encontrar el subarreglo que cruza el punto medio.
-
-Calculamos:
-
-$$
-n^{\log_b a}=n^{\log_2 2}=n
-$$
-
-Por lo tanto:
-
-$$
-f(n)=\Theta(n)=\Theta\left(n^{\log_2 2}\right)
-$$
-
-Esto corresponde al **caso 2 del método maestro**, ya que:
-
-$$
-f(n)=\Theta\left(n^{\log_b a}\log^k n\right)
-$$
-
-con:
-
-$$
-k=0
-$$
-
-Aplicando el resultado del caso 2:
-
-$$
-T(n)=\Theta\left(n^{\log_b a}\log^{k+1}n\right)
-$$
-
-Entonces:
+Aplicando el método maestro, con $a=2$, $b=2$ y $f(n)=\Theta(n)$, se obtiene una complejidad de:
 
 $$
 T(n)=\Theta(n\log n)
 $$
 
-Por lo tanto, la complejidad temporal de `subarreglo_maximo` es:
+**Fuerza bruta**
+
+Este algoritmo utiliza dos ciclos anidados para probar todos los subarreglos posibles. La cantidad de iteraciones se representa mediante:
 
 $$
-\boxed{\Theta(n\log n)}
+n+(n-1)+(n-2)+\cdots+1=\frac{n(n+1)}{2}
 $$
 
-### Complejidad de la fuerza bruta
-
-El algoritmo `subarreglo_fuerza_bruta` utiliza dos ciclos anidados. El ciclo exterior recorre las posiciones iniciales del subarreglo y el ciclo interior extiende el subarreglo desde esa posición.
-
-La cantidad de iteraciones puede expresarse como:
+Por lo tanto, su complejidad es:
 
 $$
-n+(n-1)+(n-2)+\cdots+1
+T(n)=\Theta(n^2)
 $$
 
-Esta suma corresponde a:
+La suma acumulada evita volver a sumar desde cero los elementos de cada subarreglo. En conclusión, divide y vencerás tiene una mejor complejidad para entradas grandes.
+
+## 3.2. Lo medido contra lo esperado
+
+Al comparar los tamaños $n=500$ y $n=1000$, el tiempo de fuerza bruta pasó de $0.008171$ a $0.021248$ segundos, un aumento aproximado de $2.60$ veces. Teóricamente, al duplicar la entrada se esperaría un crecimiento cercano a:
 
 $$
-\frac{n(n+1)}{2}
+2^2=4
 $$
 
-que pertenece a:
+En divide y vencerás, el tiempo pasó de $0.000837$ a $0.001023$ segundos, aproximadamente $1.22$ veces. Para su complejidad $n\log n$, el crecimiento esperado sería cercano a:
 
 $$
-\Theta(n^2)
+\frac{1000\log_2(1000)}{500\log_2(500)}
+\approx 2.20
 $$
 
-Dentro del ciclo interno se utiliza una suma acumulada:
+Los resultados no coinciden exactamente con la teoría, posiblemente por las variaciones del computador y el tamaño de las entradas. Aun así, la gráfica muestra que fuerza bruta aumenta sus tiempos más rápidamente que divide y vencerás.
 
-```python
-suma_actual += valores[fin]
-```
+## 3.3. ¿Qué pasa con los tamaños pequeños?
 
-Esto es importante porque permite que cada iteración tenga un costo constante, $$\Theta(1)$$, en lugar de volver a calcular la suma completa de cada subarreglo.
+Con $n=10$, fuerza bruta fue ligeramente más rápida. Esto puede ocurrir porque divide y vencerás necesita realizar llamadas recursivas, dividir el problema y calcular el tramo que cruza el punto medio. Cuando hay pocos elementos, ese trabajo adicional influye en el tiempo total.
 
-Por esta razón, la complejidad de la fuerza bruta es:
+Sin embargo, para $n=50$ y $n=100$, divide y vencerás ya presentó mejores resultados. La diferencia fue más evidente con $n=4000$: fuerza bruta tardó $0.314219$ segundos, mientras que divide y vencerás tardó $0.004455$ segundos.
 
+Esto demuestra que ambos métodos funcionan con entradas pequeñas, pero divide y vencerás ofrece una ventaja importante cuando aumenta la cantidad de datos.
+
+## 3.4. ¿Cuándo conviene dividir?
+
+Dividir un problema no siempre mejora su rendimiento. Por ejemplo, para encontrar el valor máximo de una lista basta con recorrerla una sola vez y guardar el mayor elemento encontrado. La recurrencia de este método es:
 
 $$
-\boxed{\Theta(n^2)}
+T(n)=T(n-1)+\Theta(1)
 $$
 
+Su complejidad es:
 
-### Comparación de los algoritmos
+$$
+T(n)=\Theta(n)
+$$
 
-| Algoritmo | Análisis | Complejidad |
-|---|---|---|
-| Fuerza bruta | Dos ciclos anidados | $$\Theta(n^2)$$ |
-| Divide y vencerás | $$2T(n/2)+\Theta(n)$$ | $$\Theta(n\log n)$$ |
+Si se divide la lista en dos mitades y después se comparan sus máximos, la recurrencia sería:
 
-En conclusión, el algoritmo de **divide y vencerás** tiene una menor complejidad asintótica que la solución por fuerza bruta. Esto se debe a que divide el problema en dos partes y realiza un recorrido lineal adicional para encontrar el mejor subarreglo que cruza el punto medio, obteniendo una complejidad de $$\Theta(n\log n)$$, frente a $$\Theta(n^2)$$ de la fuerza bruta.
+$$
+T(n)=2T(n/2)+\Theta(1)
+$$
+
+Este enfoque también tiene complejidad lineal:
+
+$$
+T(n)=\Theta(n)
+$$
+
+Por lo tanto, dividir no mejora la complejidad en este caso y agrega trabajo adicional. Es más conveniente recorrer la lista una sola vez.
+
+## 3.5. Recomendación para la cooperativa
+
+Para encontrar el subarreglo de suma máxima, recomendaría divide y vencerás frente a fuerza bruta, porque las mediciones muestran que funciona mejor cuando aumenta la cantidad de datos.
+
+Tomando como referencia el tiempo registrado para $n=4000$ y extrapolando según la complejidad de cada algoritmo, para un millón de registros se estiman los siguientes tiempos.
+
+Para fuerza bruta:
+
+$$
+0.314219\left(\frac{1\,000\,000}{4\,000}\right)^2
+\approx 19\,639\text{ s}
+$$
+
+Esto equivale aproximadamente a $5.45$ horas.
+
+Para divide y vencerás:
+
+$$
+0.004455
+\left(
+\frac{1\,000\,000\log_2(1\,000\,000)}
+{4\,000\log_2(4\,000)}
+\right)
+\approx 1.85\text{ s}
+$$
+
+| Algoritmo | Complejidad | Tiempo estimado |
+|---|---|---:|
+| Fuerza bruta | $\Theta(n^2)$ | 5.45 horas |
+| Divide y vencerás | $\Theta(n\log n)$ | 1.85 segundos |
+
+Estos valores son estimaciones matemáticas, no mediciones reales para un millón de registros. El tiempo efectivo puede variar según el computador y las condiciones de ejecución.
+
+En conclusión, divide y vencerás es la alternativa más conveniente entre las dos evaluadas, especialmente si la cooperativa necesita analizar grandes cantidades de información.
+
+---
+
+## Autores
+
+- Jhon Fernando Sánchez Álvarez
+--- 
