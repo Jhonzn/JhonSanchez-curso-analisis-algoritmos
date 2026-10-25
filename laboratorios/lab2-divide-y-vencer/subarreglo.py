@@ -12,8 +12,6 @@ def subarreglo_fuerza_bruta(valores: list[float]) -> tuple[int, int, float]:
         Una tupla (inicio, fin, suma) con los indices inclusivos del
         tramo de mayor suma y el valor de esa suma.
     """
-    # TODO: implemente la solucion en Θ(n²): acumule la suma dentro del
-    # ciclo en vez de recalcularla desde cero para cada par.
     mejor_inicio = 0
     mejor_fin = 0
     mejor_suma = valores[0]
@@ -47,7 +45,6 @@ def suma_cruzada(
         Una tupla (inicio, fin, suma) del mejor tramo que incluye al
         menos un elemento de cada mitad.
     """
-    # TODO: barrido lineal desde el punto medio hacia cada lado.
     suma_izquierda = valores[medio]
     suma_actual = 0
     mejor_inicio = medio
@@ -87,7 +84,6 @@ def subarreglo_maximo(
         Una tupla (inicio, fin, suma) del mejor tramo dentro de
         valores[inicio..fin].
     """
-    # TODO: caso base, dos llamadas recursivas, caso cruzado y combinar.
     if inicio == fin:
         return inicio, fin, valores[inicio]
 

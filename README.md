@@ -12,7 +12,7 @@ Las carpetas del repositorio se organizan de la siguiente manera:
 
 * `laboratorio-1/` — [Laboratorio 1](laboratorios/lab1-fundamentos-complejidad-recurrencias): contiene los archivos correspondientes al primer informe de laboratorio.
 
-* `laboratorio-2/`: contiene los archivos correspondientes al segundo informe de laboratorio.
+* `laboratorio-2/` — [Laboratorio 2](laboratorios/lab2-divide-y-vencer): contiene los archivos correspondientes al segundo informe de laboratorio.
 
 * `laboratorio-3/`: contiene los archivos correspondientes al tercer informe de laboratorio.
 
