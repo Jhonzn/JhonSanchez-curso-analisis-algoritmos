@@ -31,11 +31,11 @@ class ListaEnlazada:
             guia: numero de guia del envio.
             estado: estado actual del envio.
         """
-        def insertar(self, guia: int, estado: str) -> None:
-            nuevo = Nodo(guia, estado)
-            nuevo.siguiente = self.cabeza
-            self.cabeza = nuevo
-            self.tamano += 1
+        nuevo = Nodo(guia, estado)
+        nuevo.siguiente = self.cabeza
+        self.cabeza = nuevo
+        self.tamano += 1
+            
  
     def buscar(self, guia: int) -> str | None:
         """Busca una guia recorriendo la lista.
@@ -46,16 +46,16 @@ class ListaEnlazada:
         Returns:
             El estado del envio, o None si la guia no existe.
         """
-        def buscar(self, guia: int) -> str | None:
-            actual = self.cabeza
-
-            while actual is not None:
-                if actual.guia == guia:
-                    return actual.estado
-
-                actual = actual.siguiente
-
-            return None
+        actual = self.cabeza
+        
+        while actual is not None:
+            if actual.guia == guia:
+                return actual.estado
+        
+            actual = actual.siguiente
+        
+        return None
+            
  
  
 class TablaHash:
@@ -80,8 +80,7 @@ class TablaHash:
         Returns:
             Un indice entre 0 y m - 1.
         """
-        def hash(self, guia: int) -> int:
-            return guia % self.m
+        return guia % self.m
  
     def insertar(self, guia: int, estado: str) -> None:
         """Inserta una guia en la lista de su casilla.
@@ -90,10 +89,9 @@ class TablaHash:
             guia: numero de guia del envio.
             estado: estado actual del envio.
         """
-        def insertar(self, guia: int, estado: str) -> None:
-            indice = self.hash(guia)
-            self.casillas[indice].insertar(guia, estado)
-            self.tamano += 1
+        indice = self.hash(guia)
+        self.casillas[indice].insertar(guia, estado)
+        self.tamano += 1
  
     def buscar(self, guia: int) -> str | None:
         """Busca una guia recorriendo solo la lista de su casilla.
@@ -104,9 +102,8 @@ class TablaHash:
         Returns:
             El estado del envio, o None si la guia no existe.
         """
-        def buscar(self, guia: int) -> str | None:
-            indice = self.hash(guia)
-            return self.casillas[indice].buscar(guia)
+        indice = self.hash(guia)
+        return self.casillas[indice].buscar(guia)
         
     def factor_carga(self) -> float:
         """Calcula el factor de carga de la tabla.
@@ -114,5 +111,4 @@ class TablaHash:
         Returns:
             El cociente entre guias almacenadas y casillas (n / m).
         """
-        def factor_carga(self) -> float:
-            return self.tamano / self.m
+        return self.tamano / self.m
