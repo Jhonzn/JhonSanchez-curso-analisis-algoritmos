@@ -14,7 +14,7 @@ Las carpetas del repositorio se organizan de la siguiente manera:
 
 * `laboratorio-2/` — [Laboratorio 2](laboratorios/lab2-divide-y-vencer): contiene los archivos correspondientes al segundo informe de laboratorio.
 
-* `laboratorio-3/`: contiene los archivos correspondientes al tercer informe de laboratorio.
+* `laboratorio-3/` — [Laboratorio 3](laboratorios/lab3-estructuras-datos): contiene los archivos correspondientes al tercer informe de laboratorio.
 
 * `laboratorio-4/`: contiene los archivos correspondientes al cuarto informe de laboratorio.
 
