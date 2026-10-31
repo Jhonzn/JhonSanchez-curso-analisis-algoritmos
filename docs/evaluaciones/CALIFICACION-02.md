@@ -1,73 +1,63 @@
-# Retroalimentación — Laboratorio 02: Dividir y vencer
+# Retroalimentación — Laboratorio 02 Dividir y vencer
 
 **Estudiante:** Jhon Sánchez Álvarez · **Laboratorio:** Laboratorio evaluativo 02 — Dividir y vencer
-**Fecha límite:** 2026-10-21 23:59 · **Versión revisada:** commit `142ca5b`
+**Fecha límite:** 2026-10-30 23:59 · **Versión revisada:** commit `d1a2e5f`
 
-Buen trabajo: el laboratorio funciona y está bien encaminado; con los ajustes de abajo quedará aún más sólido.
+Buen trabajo: el código es correcto y el informe sigue la estructura pedida.
 
 ## Nota
 
 | Criterio | Puntos |
 |---|---|
-| Corrección conceptual | 17 / 20 |
-| Calidad de la explicación teórica | 14 / 20 |
-| Corrección de la implementación | 24 / 25 |
-| Calidad del análisis de las gráficas | 19 / 25 |
-| Documentación y organización del informe | 7 / 10 |
-| **Total** | **81 / 100** |
-| **Nota (0–5)** | **4.05** |
+| Corrección conceptual | 15 / 20 |
+| Calidad de la explicación teórica | 15 / 20 |
+| Corrección de la implementación | 25 / 25 |
+| Calidad del análisis de las gráficas | 18 / 25 |
+| Documentación y organización del informe | 10 / 10 |
+| **Total** | **83 / 100** |
+| **Nota (0–5)** | **4.15** |
 
-## 1. Corrección conceptual (17 / 20)
+## 1. Corrección conceptual (15 / 20)
 **Lo que hizo bien:**
-- Explica que con n = 10 la fuerza bruta es un poco más rápida y por qué (el costo extra de las llamadas recursivas), y que desde n = 50 gana divide y vencerás.
-- En la pregunta del máximo de un arreglo muestra que dividir no mejora: ambas formas son `Θ(n)`.
-- Recomienda divide y vencerás y estima el tiempo para 1.000.000 de registros, declarando que es una estimación y no una medición.
+- En la pregunta 4 compara bien con el máximo de un arreglo: plantea las dos recurrencias, explica que combinar cuesta solo una comparación y concluye que dividir no mejora nada.
+- En la pregunta 5 recomienda divide y vencerás, estima el tiempo para 1.000.000 de registros, dice claramente que es una estimación y no usa una regla de tres lineal.
 
-**Lo que puede mejorar:**
-- En la pregunta del máximo falta decir explícitamente que combinar cuesta solo una comparación, `Θ(1)`, y por eso dividir no ayuda.
-- Las cifras de la estimación salen de un valor (n = 4000) que no coincide con lo que muestra su gráfica (ver punto 4).
+**Lo que puede mejorar (y cómo corregirlo):**
+- En la pregunta 3 no dice a partir de qué tamaño divide y vencerás empieza a ganar. Solo dice que con n = 10 no se distinguen y que con n = 500 o más la diferencia es clara.
+  → *Cómo corregirlo:* mire sus valores medidos en los tamaños 10, 50, 100 y 500 e indique entre qué dos tamaños cambia cuál algoritmo es más rápido; si no hay cambio en su rango, dígalo y explique por qué.
 
-## 2. Calidad de la explicación teórica (14 / 20)
+## 2. Calidad de la explicación teórica (15 / 20)
 **Lo que hizo bien:**
-- Plantea `T(n) = 2T(n/2) + Θ(n)` y la resuelve como `Θ(n log n)`.
-- Justifica la fuerza bruta con la suma `n(n+1)/2` y menciona la suma acumulada.
+- Plantea la recurrencia `T(n) = 2T(n/2) + Θ(n)` y explica de dónde sale cada término, incluido el costo lineal del caso cruzado.
+- Resuelve con el método maestro, comprueba la condición del caso 2 y llega a `Θ(n log n)`.
 
-**Lo que puede mejorar:**
-- No explica de dónde sale cada término: por qué 2 subproblemas, por qué de tamaño n/2 y por qué el caso cruzado cuesta `Θ(n)`.
-- No verifica la condición del método maestro: debía comparar `f(n)` con `n^(log_2 2) = n`, decir qué caso es y por qué aplica.
+**Lo que puede mejorar (y cómo corregirlo):**
+- La pregunta 1 también pedía explicar por qué la fuerza bruta es `Θ(n²)`, y esa explicación no aparece.
+  → *Cómo corregirlo:* describa los dos ciclos de `subarreglo_fuerza_bruta`, cuántas veces se repite cada uno según n y qué resulta al sumar el trabajo total.
 
-## 3. Corrección de la implementación (24 / 25)
+## 3. Corrección de la implementación (25 / 25)
 **Lo que hizo bien:**
-- Las tres funciones dan la suma correcta en todos los casos pedidos y coinciden entre sí en 30 listas aleatorias.
+- Las tres funciones dan la suma correcta en todos los casos pedidos (serie de ocho días, un elemento, todo negativo, todo positivo, caso cruzado) y en las 30 listas aleatorias.
 - `subarreglo_maximo` resuelve los tres casos sin llamar a la fuerza bruta y ninguna función modifica la lista recibida.
-- Tiene tipos y documentación en cada función, y el código cumple PEP 8.
+- Tiene *type hints*, *docstrings* con `Args` y `Returns`, y las líneas en blanco entre funciones.
 
-**Lo que puede mejorar:**
-- Dejó los comentarios `TODO` de la plantilla dentro del código ya terminado; conviene borrarlos.
-
-## 4. Calidad del análisis de las gráficas (19 / 25)
+## 4. Calidad del análisis de las gráficas (18 / 25)
 **Lo que hizo bien:**
-- La gráfica tiene título, ejes rotulados, leyenda, ambas curvas en los mismos ejes y siete tamaños. Se ve en el informe.
-- Calcula el factor de crecimiento al duplicar n (500 a 1000) para los dos algoritmos y lo compara con lo esperado.
+- La gráfica tiene ambas curvas en los mismos ejes, título, ejes rotulados y leyenda, y cubre siete tamaños (de 10 a 4000).
+- Se ve en el README, mide con `time.perf_counter()`, usa semilla fija, repite 10 veces cada medición y verifica que ambos algoritmos den la misma suma.
+- Calcula el factor de crecimiento al duplicar n para los dos algoritmos y lo compara con `Θ(n²)` y `Θ(n log n)`.
 
-**Lo que puede mejorar:**
-- Las cifras del informe no coinciden con su gráfica publicada: en n = 4000 el informe dice 0.314 s para fuerza bruta, pero la curva promedio de la gráfica está cerca de 0.29 s; en n = 1000 dice 0.021 s y la gráfica marca cerca de 0.018 s.
-- Con la gráfica, el salto de 500 a 1000 en fuerza bruta se ve cercano a 3 veces, no 2.6. La explicación de por qué no coincide con la teoría ("variaciones del computador") es muy general; probar otro par, como 2000 a 4000, habría dado una lectura más clara.
+**Lo que puede mejorar (y cómo corregirlo):**
+- Los números del informe no coinciden con la gráfica publicada. En la Parte 2 y en la pregunta 3 dice que con n = 4000 la fuerza bruta tarda cerca de 0.292 s, que sí se ve en la gráfica. Pero en la pregunta 2 y en la estimación de la pregunta 5 usa 0.314 s para n = 4000 y 0.083 s para n = 2000, mientras que la gráfica muestra cerca de 0.29 s y 0.087 s.
+  → *Cómo corregirlo:* elija una sola fuente (los promedios de la gráfica publicada) y use esos mismos valores en todas las preguntas; si vuelve a medir, vuelva a publicar la gráfica para que coincida con el texto.
+- Para divide y vencerás (n = 500 y 1000) usa valores "visuales" aproximados, que en esa escala casi no se pueden leer, y el propio informe admite que deben contrastarse con los datos reales.
+  → *Cómo corregirlo:* agregue una tabla en el README con los promedios medidos de cada tamaño y calcule los factores a partir de ella.
 
-## 5. Documentación y organización del informe (7 / 10)
+## 5. Documentación y organización del informe (10 / 10)
 **Lo que hizo bien:**
-- El laboratorio está en `laboratorios/lab2-divide-y-vencer/` con todos los archivos pedidos, y el informe sigue el orden pedido con la gráfica visible.
-- Hay instrucciones de reproducción y 4 commits sobre el laboratorio.
-
-**Lo que puede mejorar:**
-- Ninguna parte enlaza su código: faltan enlaces a `subarreglo.py` y `pruebas.py` al inicio de la Parte 1, y a `medicion.py` al inicio de la Parte 2.
+- El laboratorio está en `laboratorios/lab2-divide-y-vencer/` con todos los archivos pedidos.
+- El README tiene su nombre, instrucciones de reproducción, las partes en orden y enlaces al código en cada parte práctica.
+- Hay varios commits con mensajes descriptivos.
 
 ## ¿El código funciona?
-Sí. Las pruebas pasan, las dos soluciones dan siempre la misma suma (también en mis pruebas con listas aleatorias) y `medicion.py` se ejecuta y genera la gráfica.
-
-## Para el próximo laboratorio
-- Enlace en el informe cada archivo de código al inicio de la parte donde se usa.
-- Explique cada término de la recurrencia y verifique la condición del método maestro, nombrando el caso.
-- Copie las cifras del informe desde la gráfica o la tabla que publica, para que coincidan.
-- Calcule el factor de crecimiento con varios pares de tamaños y explique con datos las diferencias con la teoría.
-- Borre los comentarios de la plantilla (`TODO`) antes de entregar.
+Sí. Las pruebas pasan, las dos soluciones coinciden con un cálculo de referencia en listas aleatorias, y `medicion.py` corre completo y genera la gráfica.
